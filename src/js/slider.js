@@ -9,15 +9,36 @@ function move(event){
     position.push(x);
 }
 
-
 function handleUp(){
     // 마우스를 땠을 때
     pressed = false;
     container.style.cursor = "";
     container.removeEventListener("mousemove",move);
+    checkDirection(position);
     position = [];
 }
 
+function changeImg(){
+    const img = document.querySelector(`img:first-child`);
+    const currentImg = document.querySelector('.show');
+    if(currentImg){
+        currentImg.classList.remove("show");
+        const nextImg = currentImg.nextElementSibling;
+        if(nextImg){
+            nextImg.classList.add("show");
+        }
+        else{
+            img.classList.add("show");
+        }
+    }
+}
+
+function checkDirection(position){
+    const currentX = position[0];
+    const lastX = position.slice(-1).pop();
+    const currentXPosition = lastX - currentX;
+    changeImg();
+}
 
 function handleClick(){
     // 눌렀을 때
@@ -27,7 +48,6 @@ function handleClick(){
         container.addEventListener("mousemove", move);
     }
 }
-
 
 function init(){
     container.addEventListener("mousedown", handleClick);
