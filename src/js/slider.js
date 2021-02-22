@@ -18,17 +18,19 @@ function handleUp(){
     position = [];
 }
 
-function changeImg(){
+function changeImg(currentXPosition){
     const img = document.querySelector(`img:first-child`);
     const currentImg = document.querySelector('.show');
-    if(currentImg){
-        currentImg.classList.remove("show");
-        const nextImg = currentImg.nextElementSibling;
-        if(nextImg){
-            nextImg.classList.add("show");
-        }
-        else{
-            img.classList.add("show");
+    if(currentXPosition > 0){
+        if(currentImg){
+            currentImg.classList.remove("show");
+            const nextImg = currentImg.nextElementSibling;
+            if(nextImg){
+                nextImg.classList.add("show");
+            }
+            else{
+                img.classList.add("show");
+            }
         }
     }
 }
@@ -37,7 +39,7 @@ function checkDirection(position){
     const currentX = position[0];
     const lastX = position.slice(-1).pop();
     const currentXPosition = lastX - currentX;
-    changeImg();
+    changeImg(currentXPosition);
 }
 
 function handleClick(){
